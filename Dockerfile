@@ -52,6 +52,7 @@ COPY util/start-workshop.sh /usr/local/bin/start-workshop.sh
 RUN chmod +x /usr/local/bin/start-workshop.sh
 
 WORKDIR /home/rootless/workshop
+RUN chown rootless:rootless /home/rootless/workshop
 
 USER rootless
 
