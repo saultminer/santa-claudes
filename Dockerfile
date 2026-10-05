@@ -50,12 +50,13 @@ RUN apt-get update \
 COPY util/start-workshop.sh /usr/local/bin/start-workshop.sh
 RUN chmod +x /usr/local/bin/start-workshop.sh
 
+WORKDIR /home/rootless/workshop
+RUN chown rootless:rootless /home/rootless/workshop
+
+USER rootless
+
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH=/home/rootless/.cargo/bin:$PATH
 RUN cargo install cargo-watch
-
-WORKDIR /home/rootless/workshop
-
-USER rootless
 
 CMD ["/usr/local/bin/start-workshop.sh"]
