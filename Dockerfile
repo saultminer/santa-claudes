@@ -50,9 +50,11 @@ RUN apt-get update \
 COPY util/start-workshop.sh /usr/local/bin/start-workshop.sh
 RUN chmod +x /usr/local/bin/start-workshop.sh
 
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
         nodejs \
-        npm
+        npm \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV NPM_CONFIG_PREFIX=/home/rootless/.npm-global
 ENV PATH=/home/rootless/.npm-global/bin:$PATH
