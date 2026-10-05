@@ -50,10 +50,9 @@ RUN apt-get update \
 COPY util/start-workshop.sh /usr/local/bin/start-workshop.sh
 RUN chmod +x /usr/local/bin/start-workshop.sh
 
-ENV NPM_CONFIG_PREFIX=/home/rootless/.npm-global
-ENV PATH=/home/rootless/.npm-global/bin:$PATH
-RUN mkdir -p /home/rootless/.npm-global \
-    && chown -R rootless:rootless /home/rootless
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH=/home/rootless/.cargo/bin:$PATH
+RUN cargo install cargo-watch
 
 WORKDIR /home/rootless/workshop
 
