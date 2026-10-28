@@ -60,6 +60,12 @@ RUN apt-get update \
         nodejs \
         npm \
     && rm -rf /var/lib/apt/lists/*
+    
+RUN npm cache clean -f \
+    && npm install -g n \
+    && n 24 \
+    && hash -r \
+    && ln -sf /usr/local/bin/node /usr/bin/node
 
 ENV NPM_CONFIG_PREFIX=/home/rootless/.npm-global
 ENV PATH=/home/rootless/.npm-global/bin:$PATH
