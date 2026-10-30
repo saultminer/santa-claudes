@@ -63,7 +63,7 @@ RUN apt-get update \
     
 RUN npm cache clean -f \
     && npm install -g n \
-    && n 24 \
+    && n 26 \
     && hash -r \
     && ln -sf /usr/local/bin/node /usr/bin/node
 
